@@ -9,9 +9,37 @@
 <body>
     <script type="text/javascript">
     //   数组中重复的数字
-    // var arr = [1,12,5,12,9,10,9]
-    // 三数之和
-    var nums = [-1, 0, 1, 2 - 1, -4];
+    var array = [-1, 0, 1, 2, -1, -4];
+    var arr = [];
+    // 思路
+    // 1 从小到大排序
+    // 2 如果三个数相加等于0 push进数组
+    // 3 如果大于0,
+    // 4 如果小于0,
+    // if (array.length < 3) {
+    //   return arr;
+    // }
+    array.sort((a, b) => a - b); // 排序
+    for (let index = 0; index < array.length; index++) {
+        if (array[index] > 0) break;
+        if (index > 0 && array[index] == array[index - 1]) continue;
+        let L = index + 1,
+            R = array.length - 1;
+        while (L < R) {
+            if (array[index] + array[L] + array[R] === 0) {
+                arr.push(array[index], array[L], array[R]);
+                while (L < R && array[L] == array[L + 1]) L++; // 去重
+                while (L < R && array[R] == array[R - 1]) R--; // 去重
+                L++;
+                R--;
+            } else if (array[index] + array[L] + array[R] > 0) {
+                R--;
+            } else if (array[index] + array[L] + array[R] < 0) {
+                L++;
+            }
+        }
+    }
+    console.log(arr);
 
     Array.prototype.push2 = function() {
         for (var i = 0; i < arguments.length; i++) {
@@ -90,13 +118,13 @@
         if (typeof deleteCount === 'undefined') {
             deleteCount = this.length - start
         }
-        const removeList = this.slice(start,start+deleteCount);
+        const removeList = this.slice(start, start + deleteCount);
 
-        const right = this.slice(start+deleteCount);
+        const right = this.slice(start + deleteCount);
         let addIndex = start;
-        addList.concat(right).forEach(function(item){
-          this.addList[addIndex] = item;
-          addIndex++;
+        addList.concat(right).forEach(function(item) {
+            this.addList[addIndex] = item;
+            addIndex++;
         })
         this.length = addIndx;
         return removeList;
