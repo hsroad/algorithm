@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数组算法</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    //   数组中重复的数字
+    // var arr = [1,12,5,12,9,10,9]
+    // 三数之和
+    var nums = [-1, 0, 1, 2 - 1, -4];
+
+    Array.prototype.push2 = function() {
+        for (var i = 0; i < arguments.length; i++) {
+            console.log('this.length', this.length)
+            this[this.length] = arguments[i]
+        }
+        // console.log('this.length2',this.length)
+        return this.length
+    }
+    // console.log(arr.push2(12))
+    // Array.prototype._shift=function () {
+    //     var num=this[0];
+    //     debugger
+    //     for(var i=1;i<this.length;i++){
+    //         this[i-1]=this[i];
+    //     }
+    //     this.length--;
+    //     return num;
+    // };
+    // var ary = [1,2,3,4,5,6,7,8]
+    // console.log(ary._shift())  
+
+    // Array.prototype._shift = function() {
+    //     if (!this.length) {
+    //         return undefined
+    //     }
+    //     var start = this[0];
+    //     this[0] = null;
+    //     for (var i = 0; i < this.length - 1; i++) {
+    //         this[i] = this[i + 1]
+    //     }
+    //     this.length = this.length - 1
+    //     return start
+    // }
+    // var ary = [1, 2, 3, 4, 5, 6, 7, 8]
+    // console.log(ary._shift())
+    // console.log(ary)
+    // unshift
+    // Array.prototype._unshift = function(...value) {
+    //     for (var i = (this.length + arguments.length - 1); i > arguments.length - 1; i--) {
+    //         this[i] = this[i - arguments.length]
+    //     }
+    //     for (var k = 0; k < arguments.length; k++) {
+    //         this[k] = arguments[k]
+    //     }
+    //     return this.length
+    // }
+    // function unshift() {
+    //     //创建一个新数组接收添加的元素
+    //     let newAry = [];
+    //     for (let i = 0; i < arguments.length; i++) {
+    //         newAry[i] = arguments[i];
+    //     }
+    //     let len = newAry.length;
+    //     for (let i = 0; i < this.length; i++) {
+    //         newAry[i + len] = this[i];
+    //     }
+    //     for (let i = 0; i < newAry.length; i++) {
+    //         this[i] = newAry[i];
+    //     }
+    //     return this.length;
+    // }
+    Array.prototype._unshift = unshift;
+    var arr = [1, 2, 3, 4];
+    arr._unshift(9, 8)
+    console.log(arr); // [ 9, 8, 1, 2, 3, 4 ]
+
+    function splice(start, delCount, ...addList) {
+        if (start < 0) {
+            if (Math.abs(start) > this.length) {
+                start = 0;
+            } else {
+                start += this.length;
+            }
+        }
+        if (typeof deleteCount === 'undefined') {
+            deleteCount = this.length - start
+        }
+        const removeList = this.slice(start,start+deleteCount);
+
+        const right = this.slice(start+deleteCount);
+        let addIndex = start;
+        addList.concat(right).forEach(function(item){
+          this.addList[addIndex] = item;
+          addIndex++;
+        })
+        this.length = addIndx;
+        return removeList;
+    }
+    Array.prototype._splice = splice
+    </script>
+</body>
+
+</html>
